@@ -15,6 +15,7 @@ import ForgeUI, {
   Cell,
   Head,
   Row,
+  UserPicker,
   GlobalPage 
 } from '@forge/ui';
 
@@ -37,7 +38,7 @@ import ForgeUI, {
 
   return (
     <Fragment>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} submitButtonText="Filter">
         <Table>
           <Row>
 
@@ -46,7 +47,7 @@ import ForgeUI, {
                 <Strong>Start date:</Strong>
               </Text>
 
-              <DatePicker name="startdate" label="" placeholder="Please select!" isRequired={true}/>
+              <DatePicker name="startdate" label="" placeholder="Select a date..." isRequired={true}/>
 
             </Cell>
 
@@ -55,10 +56,20 @@ import ForgeUI, {
                 <Strong>End date:</Strong>
               </Text>
 
-              <DatePicker name="enddate" label="" placeholder="Please select!" isRequired={true}/>
-              
+              <DatePicker name="enddate" label="" placeholder="Select a date..." isRequired={true}/>
+
             </Cell>
 
+            </Row>
+
+            <Row>
+              <Cell>
+                <Text>
+                  <Strong>User:</Strong>
+                </Text>
+
+                <UserPicker label="" name="user"/>
+              </Cell>
             </Row>
         </Table>
       </Form> 
