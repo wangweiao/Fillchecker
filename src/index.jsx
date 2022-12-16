@@ -38,22 +38,28 @@ import ForgeUI, {
   return (
     <Fragment>
       <Form onSubmit={onSubmit}>
-      <Table>
-      <Row>
-      <Cell>
-        <Text>
-          <Strong>Start date:</Strong>
-        </Text>
-        <DatePicker name="startdate" label="" placeholder="Please select!" isRequired={true}/>
-      </Cell>
+        <Table>
+          <Row>
 
-      <Cell>
-        <Text>
-          <Strong>End date:</Strong>
-        </Text>
-        <DatePicker name="enddate" label="" placeholder="Please select!" isRequired={true}/>
-      </Cell>
-        </Row>
+            <Cell>
+              <Text>
+                <Strong>Start date:</Strong>
+              </Text>
+
+              <DatePicker name="startdate" label="" placeholder="Please select!" isRequired={true}/>
+
+            </Cell>
+
+            <Cell>
+              <Text>
+                <Strong>End date:</Strong>
+              </Text>
+
+              <DatePicker name="enddate" label="" placeholder="Please select!" isRequired={true}/>
+              
+            </Cell>
+
+            </Row>
         </Table>
       </Form> 
       {formState && <Text>{JSON.stringify(formState)}</Text>}
