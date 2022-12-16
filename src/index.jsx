@@ -16,6 +16,7 @@ import ForgeUI, {
   Head,
   Row,
   UserPicker,
+  Heading,
   GlobalPage 
 } from '@forge/ui';
 
@@ -77,10 +78,12 @@ import api, {
             </Row>
         </Table>
       </Form> 
+      
       {formState && <Text>{JSON.stringify(formState)}</Text>}
 
-      <Text>     </Text>
+      {formState && <Heading size="medium">Records</Heading>}
 
+      {formState && 
       <Table>
         <Head>
           <Cell>
@@ -110,7 +113,9 @@ import api, {
           </Cell>
         </Head>
         
-  </Table>
+      </Table>
+      }
+
 
     </Fragment>
   );
