@@ -19,6 +19,10 @@ import ForgeUI, {
   GlobalPage 
 } from '@forge/ui';
 
+import api, { 
+  route 
+} from '@forge/api';
+
   const App = () => {
 
 // useState is a UI kit hook we use to manage the form data in local state
@@ -74,6 +78,40 @@ import ForgeUI, {
         </Table>
       </Form> 
       {formState && <Text>{JSON.stringify(formState)}</Text>}
+
+      <Text>     </Text>
+
+      <Table>
+        <Head>
+          <Cell>
+            <Text>
+              <Strong>User</Strong>
+            </Text>
+          </Cell>
+          <Cell>
+            <Text>
+              <Strong>Date</Strong>
+            </Text>
+          </Cell>
+          <Cell>
+            <Text>
+              <Strong>Logged Time</Strong>
+            </Text>
+          </Cell>
+          <Cell>
+            <Text>
+              <Strong>Required Time</Strong>
+            </Text>
+          </Cell>
+          <Cell>
+            <Text>
+              <Strong>Missing Time</Strong>
+            </Text>
+          </Cell>
+        </Head>
+        
+  </Table>
+
     </Fragment>
   );
 };
