@@ -1,0 +1,11 @@
+modules:
+  jira:globalPage:
+    - key: fillchecker-hello-world
+      function: main
+      title: Fillchecker
+      icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRINvf87N2G2NZWqGtsyZ9o_d1Fxh5-rSi44Utss-Qjrg&s
+  function:
+    - key: main
+      handler: index.run
+app:
+  id: ari:cloud:ecosystem::app/c589b7b9-b52a-4e9c-b69f-84a31993a166
