@@ -20,9 +20,7 @@ import ForgeUI, {
   GlobalPage 
 } from '@forge/ui';
 
-import api, { 
-  route 
-} from '@forge/api';
+import api from '@forge/api';
 
   const App = () => {
 
