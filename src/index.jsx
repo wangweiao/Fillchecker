@@ -20,11 +20,24 @@ import ForgeUI, {
   GlobalPage 
 } from '@forge/ui';
 
-import api from '@forge/api';
+import api, { 
+  route 
+}  from '@forge/api';
 
-  const App = () => {
 
-// useState is a UI kit hook we use to manage the form data in local state
+const fetchNumberOfIssues = async () => {
+  const response = await api.asUser().requestJira(route`/rest/api/3/search`);
+  const data = await response.json();
+  return data.total;
+}
+
+
+
+const App = () => {
+
+  const [numIssues] = useState(async () => await fetchNumberOfIssues());
+
+  // useState is a UI kit hook we use to manage the form data in local state
   const [formState, setFormState] = useState(undefined);
 
   // Handles form submission, which is a good place to call APIs, or to set component state...
@@ -42,6 +55,7 @@ import api from '@forge/api';
   return (
     <Fragment>
       <Form onSubmit={onSubmit} submitButtonText="Filter">
+        <Text>Number of issues: {numIssues}</Text>
         <Table>
           <Row>
 
