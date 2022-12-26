@@ -25,15 +25,32 @@ import api, {
 }  from '@forge/api';
 
 
+
 const fetchNumberOfIssues = async () => {
   const response = await api.asUser().requestJira(route`/rest/api/3/search`);
   const data = await response.json();
   return data.total;
 }
 
+const fetchIssuesKeys = async () => {
+  const response = await api.asUser().requestJira(route`/rest/api/3/search`);
+  const data = await response.json();
+  const issues_json = data.issues;
+  var issues_keys = [];
+  for (var issue in issues_json) {
+    issues_keys.push(issues_json[issue].key);
+  }
+  return issues_keys;
+}
+
+
+
+
 
 
 const App = () => {
+
+  const [test] = useState(async () => await fetchIssuesKeys());
 
   const [numIssues] = useState(async () => await fetchNumberOfIssues());
 
@@ -42,20 +59,20 @@ const App = () => {
 
   // Handles form submission, which is a good place to call APIs, or to set component state...
   const onSubmit = async (formData) => {
-   /**
+    /**
       formData:
       {
          startdate: 'Startdate',
          enddate: 'Enddate'
       };
-     */
+    */
     setFormState(formData);
   };
 
   return (
     <Fragment>
       <Form onSubmit={onSubmit} submitButtonText="Filter">
-        <Text>Number of issues: {numIssues}</Text>
+        <Text>Test: {JSON.stringify(test)}</Text>
         <Table>
           <Row>
 
