@@ -43,6 +43,68 @@ const fetchIssuesKeys = async () => {
   return issues_keys;
 }
 
+const fetchUsersIds = async () => {
+  const response = await api.asUser().requestJira(route`/rest/api/3/user/search?query`);
+  const users = await response.json();
+  var users_ids = [];
+  var users_names = [];
+  for (var user in users) {
+    if (users[user].accountType == "atlassian") {
+      // if (users[user].accountId == "557058:9cfab274-7819-48c5-a175-73b1bb984b0d" 
+      //     || users[user].accountId == "6245ac79f813eb00692a1906") {
+      //       continue;
+      //     }
+      users_ids.push(users[user].accountId);
+      users_names.push(users[user].displayName);
+    }
+  }
+  return users_ids;
+}
+
+const fetchUsersNames = async () => {
+  const response = await api.asUser().requestJira(route`/rest/api/3/user/search?query`);
+  const users = await response.json();
+  var users_ids = [];
+  var users_names = [];
+  for (var user in users) {
+    if (users[user].accountType == "atlassian") {
+      // if (users[user].avatarUrls.displayName == "Ferenc Molnár" 
+      //     || users[user].avatarUrls.displayName == "Gergo Matyas") {
+      //       continue;
+      //     }
+      users_ids.push(users[user].accountId);
+      users_names.push(users[user].displayName);
+    }
+  }
+  return users_names;
+}
+
+//*** not working well ***
+const fetchTotalTimeOfUser = async (userId) => {
+  var issueKeys = fetchIssuesKeys();
+  
+  var response = await api.asUser().requestJira(route`/rest/api/3/issue/FC-9/worklog`);
+  var data = await response.json();
+  var records = data.worklogs;
+  var sum = "";
+  var route_str = "hello";
+
+  for (var issueKey in issueKeys) {
+    route_str = "route`/rest/api/3/issue/" + issueKeys[issueKey] + "/worklog`";
+    response = await api.asUser().requestJira(route_str);
+    data = await response.json();
+    records = data.worklogs;
+    for (var record in records) {
+      //if (records[record].author.accountId == userId) {
+        sum = sum + record.timeSpent;
+      //}
+    }
+  }
+
+  return sum;
+
+}
+
 
 
 
@@ -50,7 +112,9 @@ const fetchIssuesKeys = async () => {
 
 const App = () => {
 
-  const [test] = useState(async () => await fetchIssuesKeys());
+  const [issueKeys] = useState(async () => await fetchIssuesKeys());
+
+  const [test] = useState(async () => await fetchTotalTimeOfUser("635296ebfc0cc7a600adb7e6"));
 
   const [numIssues] = useState(async () => await fetchNumberOfIssues());
 
@@ -72,7 +136,15 @@ const App = () => {
   return (
     <Fragment>
       <Form onSubmit={onSubmit} submitButtonText="Filter">
+
+
+        <Text>Number of Issues: {numIssues}</Text>
         <Text>Test: {JSON.stringify(test)}</Text>
+        {/* {test.map(issue => (
+          <Text content={issue} />
+        ))} */}
+
+
         <Table>
           <Row>
 
